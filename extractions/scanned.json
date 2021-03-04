@@ -1,0 +1,35 @@
+{
+    "data_dir": "C:\\Users\\scott/Dropbox (Spectro Inlets)/Soren_DTU/CO_and_lattice_O/Analysis/pickles",
+    "data_file": "20A26_16O_01_fixed.pkl",
+    "data_files": null,
+    "calibration_file": "20A25_sniffer_fixed.json",
+    "RE_vs_RHE": 0.715,
+    "A_el": 0.196,
+    "tspan_experiment": [
+        0,
+        2000
+    ],
+    "tspan_exchange": [
+        200,
+        550
+    ],
+    "tspan_extraction": [
+        1150,
+        1400
+    ],
+    "tspan_ratio": [
+        5000,
+        5500
+    ],
+    "alpha": 0.9980229138709977,
+    "n_ex": {
+        "CO2": 142.4787403064013
+    },
+    "t_bg": [
+        675,
+        700
+    ],
+    "electrolyte": "16O",
+    "film": "18O",
+    "element": "Pt"
+}

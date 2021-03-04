@@ -1,0 +1,36 @@
+{
+    "name": "Jazz8_all",
+    "data_dir": "C:\\Users\\scott/Dropbox (Spectro Inlets)/Soren_DTU/CO_and_lattice_O/Analysis/pickles",
+    "data_file": "20A30_16O_06.pkl",
+    "data_files": null,
+    "calibration_file": "20A25_sniffer_fixed.json",
+    "RE_vs_RHE": 0.715,
+    "A_el": 0.196,
+    "tspan_experiment": [
+        0,
+        3500
+    ],
+    "tspan_exchange": [
+        400,
+        1100
+    ],
+    "tspan_extraction": [
+        1300,
+        2500
+    ],
+    "tspan_ratio": [
+        950,
+        1000
+    ],
+    "alpha": 0.9979516621413518,
+    "n_ex": {
+        "CO2": 195.29857622980745
+    },
+    "t_bg": [
+        3100,
+        3150
+    ],
+    "electrolyte": "16O",
+    "film": "18O",
+    "element": "Pt"
+}

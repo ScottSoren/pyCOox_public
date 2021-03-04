@@ -1,0 +1,286 @@
+{
+    "name": "calibration for sniffer on 20A25",
+    "setup": "sniffer",
+    "date": "20A25",
+    "description": null,
+    "E_ion": 70,
+    "J_fil": 0.001,
+    "T": 298.15,
+    "p": 100000.0,
+    "carrier": {
+        "He": 1
+    },
+    "chip": {
+        "l_cap": 0.001
+    },
+    "relaxed": [
+        "He"
+    ],
+    "mol_list": [],
+    "mass_list": [],
+    "F": {
+        "CO2_M44": {
+            "M44": 0.9048581195562576
+        },
+        "CO2_M46": {
+            "M46": 0.9048581195562576
+        },
+        "CO2_M48": {
+            "M48": 0.9048581195562576
+        },
+        "O2_M32": {
+            "M32": 0.9007662098867517
+        },
+        "O2_M34": {
+            "M34": 0.9007662098867517
+        },
+        "O2_M36": {
+            "M36": 0.9007662098867517
+        },
+        "H2": {
+            "M2": 1.461218528376311
+        },
+        "He": {
+            "M4": 0.5661974012227914
+        },
+        "CO": {
+            "M28": 0.9302462207305052
+        }
+    },
+    "F_0": {
+        "CO2_M44": {
+            "M44": 0.9048581195562576
+        },
+        "CO2_M46": {
+            "M46": 0.9048581195562576
+        },
+        "CO2_M48": {
+            "M48": 0.9048581195562576
+        },
+        "O2_M32": {
+            "M32": 0.9007662098867517
+        },
+        "O2_M34": {
+            "M34": 0.9007662098867517
+        },
+        "O2_M36": {
+            "M36": 0.9007662098867517
+        },
+        "H2": {
+            "M2": 1.461218528376311
+        },
+        "He": {
+            "M4": 0.5661974012227914
+        },
+        "CO": {
+            "M28": 0.9302462207305052
+        }
+    },
+    "F_type": {
+        "CO2_M44": {
+            "M44": "from mdict"
+        },
+        "CO2_M46": {
+            "M46": "from mdict"
+        },
+        "CO2_M48": {
+            "M48": "from mdict"
+        },
+        "O2_M32": {
+            "M32": "from mdict"
+        },
+        "O2_M34": {
+            "M34": "from mdict"
+        },
+        "O2_M36": {
+            "M36": "from mdict"
+        },
+        "H2": {
+            "M2": "from mdict"
+        },
+        "He": {
+            "M4": "from mdict"
+        },
+        "CO": {
+            "M28": "from mdict"
+        }
+    },
+    "cal_list": [
+        {
+            "name": "CO2_M44",
+            "real_name": "CO2",
+            "formula": "CO2",
+            "M": 44.009,
+            "molecule_diameter": 4.53e-10,
+            "dynamic_viscosity": 1.5000000000000002e-05,
+            "density_RTP": 1.977,
+            "D_gas_RTP": 5.8e-05,
+            "D": 1.92e-09,
+            "kH": 1.205,
+            "sigma_100eV": 3.735,
+            "primary": "M44",
+            "F_cal": 0.9048581195562576,
+            "mol": "CO2_M44",
+            "M44": 0.9048581195562576,
+            "cal_type": "from mdict"
+        },
+        {
+            "name": "CO2_M46",
+            "real_name": "CO2",
+            "formula": "CO2",
+            "M": 44.009,
+            "molecule_diameter": 4.53e-10,
+            "dynamic_viscosity": 1.5000000000000002e-05,
+            "density_RTP": 1.977,
+            "D_gas_RTP": 5.8e-05,
+            "D": 1.92e-09,
+            "kH": 1.205,
+            "sigma_100eV": 3.735,
+            "primary": "M46",
+            "F_cal": 0.9048581195562576,
+            "mol": "CO2_M46",
+            "M46": 0.9048581195562576,
+            "cal_type": "from mdict"
+        },
+        {
+            "name": "CO2_M48",
+            "real_name": "CO2",
+            "formula": "CO2",
+            "M": 44.009,
+            "molecule_diameter": 4.53e-10,
+            "dynamic_viscosity": 1.5000000000000002e-05,
+            "density_RTP": 1.977,
+            "D_gas_RTP": 5.8e-05,
+            "D": 1.92e-09,
+            "kH": 1.205,
+            "sigma_100eV": 3.735,
+            "primary": "M48",
+            "F_cal": 0.9048581195562576,
+            "mol": "CO2_M48",
+            "M48": 0.9048581195562576,
+            "cal_type": "from mdict"
+        },
+        {
+            "name": "O2_M32",
+            "real_name": "O2",
+            "formula": "O2",
+            "M": 31.998,
+            "molecule_diameter": 3.55e-10,
+            "dynamic_viscosity": 2.0700000000000002e-05,
+            "density_RTP": 1.429,
+            "D_gas_RTP": 7.23e-05,
+            "D": 2.1e-09,
+            "kH": 31.0,
+            "sigma_100eV": 2.621,
+            "primary": "M32",
+            "F_cal": 0.9007662098867517,
+            "mol": "O2_M32",
+            "M32": 0.9007662098867517,
+            "cal_type": "from mdict"
+        },
+        {
+            "name": "O2_M34",
+            "real_name": "O2",
+            "formula": "O2",
+            "M": 31.998,
+            "molecule_diameter": 3.55e-10,
+            "dynamic_viscosity": 2.0700000000000002e-05,
+            "density_RTP": 1.429,
+            "D_gas_RTP": 7.23e-05,
+            "D": 2.1e-09,
+            "kH": 31.0,
+            "sigma_100eV": 2.621,
+            "primary": "M34",
+            "F_cal": 0.9007662098867517,
+            "mol": "O2_M34",
+            "M34": 0.9007662098867517,
+            "cal_type": "from mdict"
+        },
+        {
+            "name": "O2_M36",
+            "real_name": "O2",
+            "formula": "O2",
+            "M": 31.998,
+            "molecule_diameter": 3.55e-10,
+            "dynamic_viscosity": 2.0700000000000002e-05,
+            "density_RTP": 1.429,
+            "D_gas_RTP": 7.23e-05,
+            "D": 2.1e-09,
+            "kH": 31.0,
+            "sigma_100eV": 2.621,
+            "primary": "M36",
+            "F_cal": 0.9007662098867517,
+            "mol": "O2_M36",
+            "M36": 0.9007662098867517,
+            "cal_type": "from mdict"
+        },
+        {
+            "name": "H2",
+            "real_name": "H2",
+            "formula": "H2",
+            "M": 2.016,
+            "molecule_diameter": 2.71e-10,
+            "dynamic_viscosity": 8.900000000000001e-06,
+            "density_RTP": 0.08988,
+            "D_gas_RTP": 0.00014900000000000002,
+            "D": 4.5e-09,
+            "kH": 52.0,
+            "sigma_100eV": 0.969,
+            "primary": "M2",
+            "F_cal": 1.461218528376311,
+            "mol": "H2",
+            "M2": 1.461218528376311,
+            "cal_type": "from mdict"
+        },
+        {
+            "name": "He",
+            "real_name": "He",
+            "formula": "He",
+            "M": 4.002,
+            "molecule_diameter": 2.15e-10,
+            "dynamic_viscosity": 1.9900000000000003e-05,
+            "density_RTP": 0.1786,
+            "D_gas_RTP": 6.97e-05,
+            "D": 6.28e-09,
+            "kH": 110,
+            "sigma_100eV": 0.37,
+            "primary": "M4",
+            "F_cal": 0.5661974012227914,
+            "mol": "He",
+            "M4": 0.5661974012227914,
+            "cal_type": "from mdict"
+        },
+        {
+            "name": "CO",
+            "real_name": "CO",
+            "formula": "CO",
+            "M": 28.009999999999998,
+            "molecule_diameter": 3.76e-10,
+            "dynamic_viscosity": 1.7800000000000002e-05,
+            "density_RTP": 1.145,
+            "D_gas_RTP": 6.98e-05,
+            "D": 1.92e-09,
+            "kH": 43.5,
+            "sigma_100eV": 2.616,
+            "primary": "M28",
+            "F_cal": 0.9302462207305052,
+            "mol": "CO",
+            "M28": 0.9302462207305052,
+            "cal_type": "from mdict"
+        }
+    ],
+    "real_names": {
+        "CO2_M44": "CO2",
+        "CO2_M46": "CO2",
+        "CO2_M48": "CO2",
+        "O2_M32": "O2",
+        "O2_M34": "O2",
+        "O2_M36": "O2",
+        "H2": "H2",
+        "He": "He",
+        "CO": "CO"
+    },
+    "alpha": null,
+    "beta": null,
+    "spectrum_betas": {}
+}

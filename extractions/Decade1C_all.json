@@ -1,0 +1,39 @@
+{
+    "name": "Decade1C_all",
+    "data_dir": "C:/Users/scott/Dropbox (Spectro Inlets)/Soren_DTU/COox_I_and_II/Analysis/pickles",
+    "data_file": null,
+    "data_files": [
+        "20A30_16O_03.pkl",
+        "20A30_16O_04.pkl"
+    ],
+    "calibration_file": "20A25_sniffer_fixed.json",
+    "RE_vs_RHE": 0.715,
+    "A_el": 0.196,
+    "tspan_experiment": [
+        0,
+        20000
+    ],
+    "tspan_exchange": [
+        400,
+        1200
+    ],
+    "tspan_extraction": [
+        2000,
+        6000
+    ],
+    "tspan_ratio": [
+        14800,
+        15000
+    ],
+    "alpha": 0.9978603230484696,
+    "n_ex": {
+        "CO2": 26.778562480885864
+    },
+    "t_bg": [
+        13300,
+        13400
+    ],
+    "electrolyte": "16O",
+    "film": "18O",
+    "element": "Pt"
+}
