@@ -19,16 +19,16 @@ plt.close('all')
 data_dir = r'C:\EC_data\scott\CO_and_lattice_O_project' # Windows
 #U:\FYSIK\list-SurfCat\setups\sniffer\Data\single_crystal_Cu\19J08_Ruben
 MSset = {#'time':'2020-01-26%',
-        'comment':'20A31%'
+        'comment':'20A30%'
          }
-folder = '20A31_18O'
+folder = '20A30_16O'
 
 
 
-if not os.path.isdir('./pickles'):  
-    os.mkdir('./pickles') # to put the synchronized data, as pickle files
-if not os.path.isdir('./overviews'): 
-    os.mkdir('./overviews') # to put the overview plots
+if not os.path.isdir('pickles'):
+    os.mkdir('pickles') # to put the synchronized data, as pickle files
+if not os.path.isdir('overviews'):
+    os.mkdir('overviews') # to put the overview plots
 
 
 
@@ -47,7 +47,6 @@ if True: # it's a bit slow...
     with open('./pickles/' + folder + '_MS_data.pkl', 'wb') as pkl: # defines the file, 'wb' means 'write binary'.
         pickle.dump(MS_data, pkl) # save MS_data into the file
 
-#doesnt = exist
 
 # -------- Then, we load each EC experiment and combining it with MS data -------- #
 

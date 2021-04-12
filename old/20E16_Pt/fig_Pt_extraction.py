@@ -13,7 +13,7 @@ if False:  # old wierd import during Spectro Inlet employment
     c.F = c.F_0
     #  I have no fucking idea why this is necessary. Calibraiton.__init__ broke
 
-calibration_dir = Path("..").absolute()
+calibration_dir = Path("../..").absolute()
 calibration_file = calibration_dir / "20A25_sniffer_fixed.json"
 
 mdict = mdict_from_SI2020_calibration_file(calibration_file)

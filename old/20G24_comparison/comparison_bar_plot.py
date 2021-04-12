@@ -33,7 +33,7 @@ extraction_specs = {
         {"file":"Jazz8b_all.json", "position":4, "t_start":167, "fancy_name":"Ir$^{18}$O$_x\cdot y$H$_2$O",},
     }
 
-calibration_dir = Path("..").absolute()
+calibration_dir = Path("../..").absolute()
 calibration_file = calibration_dir / "20A25_sniffer_fixed.json"
 mdict = mdict_from_SI2020_calibration_file(calibration_file)
 

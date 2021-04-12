@@ -20,7 +20,7 @@ if forpublication:  # for the publication figure
 else:
     plt.style.use("default")
 
-calibration_dir = Path("..").absolute()
+calibration_dir = Path("../..").absolute()
 calibration_file = calibration_dir / "20A25_sniffer_fixed.json"
 
 mdict = mdict_from_SI2020_calibration_file(calibration_file)

@@ -19,16 +19,16 @@ plt.close('all')
 data_dir = r'C:\EC_data\scott\CO_and_lattice_O_project' # Windows
 #U:\FYSIK\list-SurfCat\setups\sniffer\Data\single_crystal_Cu\19J08_Ruben
 MSset = {#'time':'2020-01-26%',
-        'comment':'20B01%'
+        'comment':'20B02%'
          }
-folder = '20B01_16O'
+folder = '20B02_16O'
 
 
 
-if not os.path.isdir('./pickles'):  
-    os.mkdir('./pickles') # to put the synchronized data, as pickle files
-if not os.path.isdir('./overviews'): 
-    os.mkdir('./overviews') # to put the overview plots
+if not os.path.isdir('pickles'):
+    os.mkdir('pickles') # to put the synchronized data, as pickle files
+if not os.path.isdir('overviews'):
+    os.mkdir('overviews') # to put the overview plots
 
 
 
