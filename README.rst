@@ -18,13 +18,13 @@ To run the scripts:
 
 1. Make sure you have python 3.6+ installed with the ``numpy``, ``scipy``, and ``matplotlib`` packages as a minimum. I recommend Anaconda python.
 
-2. Install ``ixdat`` by typing in your terminal or Anaconda prompt::
+2. Install the latest version of `ixdat <https://ixdat.readthedocs.org>`_ by typing in your terminal or Anaconda prompt::
 
-  $ pip install ixdat
+  $ pip install --upgrade ixdat
 
 3. Clone or download this repository using git or github.
 
-4. Copy all of the .pkl files from `here. <https://www.dropbox.com/sh/owxna2hsocaw7vo/AADdQCNhZhvQ0uAD-xdCrno-a?dl=0>`_ into the folder called data.
+4. Copy all of the .pkl files from `here <https://www.dropbox.com/sh/trro30vogoy5k5p/AAAWf-Rs9bSNzcmPNnkzqyLJa?dl=0>`_ into the folder called data.
 
 5. Run the scripts with your favorite pythin IDE. I recommend spyder for quick plotting/analysis or PyCharm for development.
 A few are also available as .ipynb for use as tutorials with Jupyter Notebooks
@@ -32,7 +32,9 @@ A few are also available as .ipynb for use as tutorials with Jupyter Notebooks
 The Scripts
 ===========
 
-The following folders contain a script and some files it produces. They are in an order logical for data flow.
+The following folders contain a script and some files it produces.
+They are listed in an order logical for data flow.
+Scripts may depend on files produced by other scripts above them in this list (if so this will be clear in the comments of the script.)
 
 paper_I_fig_S1
 --------------
@@ -63,7 +65,7 @@ paper_I_fig_S2
 --------------
 Supplementary Figure S2 of Paper I
 
-See ``old/20G07/Pt_35C_CO_burst.py``
+See ``old/20G07_hydration_model/Pt_35C_CO_burst.py``
 
 paper_II_fig_S1
 ---------------
@@ -143,5 +145,5 @@ The scripts in this folder are unfortunately not very well organized and readabl
 
 End
 ===
-Enjoy, and if you find this useful, help us make ixdat even more useful for you and others:
+Enjoy, and if you find this useful, help us make ixdat even more useful for everyone:
 https://ixdat.readthedocs.io/en/latest/introduction.html#
