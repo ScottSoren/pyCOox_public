@@ -19,10 +19,26 @@ if False:  # fix calibration
 
     calibration = Calibration.load(calibration_file)
     calibration.mol_list = [
-        "H2", "He", "CO", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"
+        "H2",
+        "He",
+        "CO",
+        "O2_M32",
+        "O2_M34",
+        "O2_M36",
+        "CO2_M44",
+        "CO2_M46",
+        "CO2_M48",
     ]
     calibration.mass_list = [
-        "M2", "M4", "M28", "M32", "M34", "M36", "M44", "M46", "M48"
+        "M2",
+        "M4",
+        "M28",
+        "M32",
+        "M34",
+        "M36",
+        "M44",
+        "M46",
+        "M48",
     ]
     calibration.F["CO"]["M44"] = calibration.F["CO"]["M28"] * 1.2e-4
     calibration.F["CO"]["M34"] = calibration.F["CO"]["M28"] * 5.0e-6
@@ -67,8 +83,7 @@ extraction_specs = {
         film="18O",
     ),
     "scanned_B": dict(
-        data_files=["20A25_18O_01.pkl",
-                    "20A25_18O_02.pkl"],
+        data_files=["20A25_18O_01.pkl", "20A25_18O_02.pkl"],
         tspan_experiment=[200, 2200],
         calibration_file=calibration_file,
         # tspan_exchange = [200, 550],
@@ -103,8 +118,10 @@ extraction_specs = {
 extractions = {}
 
 run_list = [
-    "scanned", "paused", "drift",
-#    "scanned_B", "contaminated_B", "paused_B"
+    "scanned",
+    "paused",
+    "drift",
+    #    "scanned_B", "contaminated_B", "paused_B"
 ]
 run_list = "all"
 for name in extraction_specs.keys():
@@ -119,9 +136,9 @@ for name in extraction_specs.keys():
     extraction.plot_experiment(tspan="all")
     continue
 
-    #continue # so that I can test just the Extraction initiation
+    # continue # so that I can test just the Extraction initiation
     extraction.sync_metadata(RE_vs_RHE=0.715, A_el=0.196)
-    #extraction.get_alpha(simple=False, ax=None)
+    # extraction.get_alpha(simple=False, ax=None)
 
     axes = extraction.plot_exchange(mol="O2")
     extraction.plot_exchange(mol="CO2", axes=axes)
@@ -142,4 +159,3 @@ print(extraction.name)
 print(extraction.calibration_file)
 print(extraction.calibration.F["CO"])
 # empty last line so I can better select all with vim.
-

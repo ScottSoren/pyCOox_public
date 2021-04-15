@@ -46,7 +46,9 @@ axes_a = meas.plot_measurement(tspan=(0, 7500))
 
 # It's nice to have this plot really wide:
 fig_a = axes_a[0].get_figure()  # name the figure by getting it via the first axis.
-fig_a.set_figwidth(fig_a.get_figwidth() * 2.5)  # make it 2.5 times as wide as it is tall
+fig_a.set_figwidth(
+    fig_a.get_figwidth() * 2.5
+)  # make it 2.5 times as wide as it is tall
 
 if False:
     # save the figure as it is, without the highlights:
@@ -59,7 +61,7 @@ if False:
 # is saturated with hydrogen and there is zero current (OCP). This happens between
 # 6200 s and 6300 s in the measurement. We use the "grab" function:
 t_RHE, v_RHE = meas.grab("raw potential / [V]", tspan=(6200, 6300))
-RE_vs_RHE = - np.mean(v_H2)
+RE_vs_RHE = -np.mean(v_H2)
 
 # Let's plot it as a thicker line to make it clear which value we've used:
 axes_a[1].plot(t_RHE, v_RHE, color="black", linewidth=1)
@@ -116,16 +118,21 @@ cal_results = [cal_result_H2]
 
 S_int = 0  # we will add the integral at each mass to this
 tspan_OER = (3750, 4350)  # a timespan in the experiment with steady OER
-for mass in ['M32', 'M34', 'M36']:
+for mass in ["M32", "M34", "M36"]:
     S_int += meas.integrate_signal(
         mass=mass,
         tspan=tspan_OER,
         t_bg=(2400, 2500),  # a timespan in the experiment to use as a background
         ax=axes_a[0],  # the axis on which to indicate the integral
     )  # The integral is returned in [A * s] = [C]
-Q = meas.integrate(
-    "raw_current / [mA]", tspan=tspan_OER, ax=axes_a[2]  # axes_a[2] is the current axis.
-) * 1e-3  # Charge passed in [C]. (factor 1e-3 converts mC to C)
+Q = (
+    meas.integrate(
+        "raw_current / [mA]",
+        tspan=tspan_OER,
+        ax=axes_a[2],  # axes_a[2] is the current axis.
+    )
+    * 1e-3
+)  # Charge passed in [C]. (factor 1e-3 converts mC to C)
 n = Q / (4 * Faraday)  # amount of O2 produced by Faraday's law of electrolysis in [mol]
 
 # The sensitivity factor is the ratio of the integrated signal to the amount of O2:
@@ -135,7 +142,10 @@ F_O2_Mx = S / n  # sensitivity factor in [C/mol]
 # define the calibration results:
 for mass in ["M32", "M34", "M36"]:
     cal = MSCalResult(
-        mass=mass, mol=f"O2_{mass}", F=F_O2_Mx, cal_type="internal",
+        mass=mass,
+        mol=f"O2_{mass}",
+        F=F_O2_Mx,
+        cal_type="internal",
     )
     cal_results.append(cal)
 
@@ -145,17 +155,19 @@ for mass in ["M32", "M34", "M36"]:
 
 S_int = 0  # we will add the integral at each mass to this
 tspan_COox = (339, 582)  # a timespan in the experiment with steady CO oxidation
-for mass in ['M44', 'M46', 'M48']:
+for mass in ["M44", "M46", "M48"]:
     S_int += meas.integrate_signal(
         mass=mass,
         tspan=tspan_COox,
         t_bg=(2400, 2500),  # a timespan in the experiment to use as a background
         ax=axes_a[0],  # the axis on which to indicate the integral
     )  # The integral is returned in [A * s] = [C]
-Q = meas.integrate(
-    "raw_current", tspan=tspan_COox, ax=axes_a[2]
-) * 1e-3  # Charge passed in [C]. (factor 1e-3 converts mC to C)
-n = Q / (2 * Faraday)  # amount of CO2 produced by Faraday's law of electrolysis in [mol]
+Q = (
+    meas.integrate("raw_current", tspan=tspan_COox, ax=axes_a[2]) * 1e-3
+)  # Charge passed in [C]. (factor 1e-3 converts mC to C)
+n = Q / (
+    2 * Faraday
+)  # amount of CO2 produced by Faraday's law of electrolysis in [mol]
 
 # The sensitivity factor is the ratio of the integrated signal to the amount of CO2:
 F_O2_Mx = S / n  # sensitivity factor in [C/mol]
@@ -164,7 +176,11 @@ F_O2_Mx = S / n  # sensitivity factor in [C/mol]
 # define the calibration results:
 for mass in ["M44", "M46", "M48"]:
     cal = MSCalResult(
-        name=f"CO2_{mass}", mass=mass, mol="CO2", F=F_O2_Mx, cal_type="internal",
+        name=f"CO2_{mass}",
+        mass=mass,
+        mol="CO2",
+        F=F_O2_Mx,
+        cal_type="internal",
     )
     cal_results.append(cal)
 
@@ -180,8 +196,8 @@ cal_CO = chip.carrier_gas_calibration(
     measurement=meas,  # the measurement with the calibration data
     mol="CO",  # the molecule to calibrate
     mass="M28",  # the mass to calibrate at
-    tspan=(110, 140),   # the timespan to average the signal over
-    ax=ax[0]  # the axis on which to indicate what signal is used with a thicker line
+    tspan=(110, 140),  # the timespan to average the signal over
+    ax=ax[0],  # the axis on which to indicate what signal is used with a thicker line
 )
 cal_He = chip.carrier_gas_calibration(
     measurement=meas, mol="He", mass="M4", tspan=(2200, 2400), ax=ax[0]
@@ -217,7 +233,7 @@ if False:  # Change this to True to make subfigure c
         mdict[cal_point.name] = m
 
     _, ax_F_vs_f = recalibrate(
-        internal=[mdict['CO2_M44'], mdict['O2_M32'], mdict['H2']],
+        internal=[mdict["CO2_M44"], mdict["O2_M32"], mdict["H2"]],
         external=[mdict["He"], CO, H2_2],
     )
     ax_F_vs_f.get_figure().savefig("F vs f.svg")

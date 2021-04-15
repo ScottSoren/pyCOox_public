@@ -14,38 +14,39 @@ example_set["t_str"] = "time/s"
 if True:
     essential_cols = [
         "I/mA",
-        '(Q-Qo)/C',
+        "(Q-Qo)/C",
         # '<Ece>/V',
         # '<Ewe>/V',
         # '<I>/mA',
-        'Ewe-Ece/V',
-        'Ewe/V',
-        'I/mA', 'M18-x',
-        'M18-y',
-        'M2-x',
-        'M2-y',
-        'M28-x',
-        'M28-y',
-        'M32-x',
-        'M32-y',
-        'M4-x',
-        'M4-y',
-        'M44-x',
-        'M44-y',
-        'control/V',
-        'control/mA',
-        'counter inc.',
-        'cycle number',
-        'dQ/C',
-        'error',
+        "Ewe-Ece/V",
+        "Ewe/V",
+        "I/mA",
+        "M18-x",
+        "M18-y",
+        "M2-x",
+        "M2-y",
+        "M28-x",
+        "M28-y",
+        "M32-x",
+        "M32-y",
+        "M4-x",
+        "M4-y",
+        "M44-x",
+        "M44-y",
+        "control/V",
+        "control/mA",
+        "counter inc.",
+        "cycle number",
+        "dQ/C",
+        "error",
         # 'file number_0',
-        'time/s',
-        'ox/red',
+        "time/s",
+        "ox/red",
     ]
 
     for col in example_set.data_cols:
         if col not in essential_cols:
-            del (example_set.data[col])
+            del example_set.data[col]
 
 example_set.plot_experiment()
 

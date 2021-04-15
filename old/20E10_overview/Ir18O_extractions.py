@@ -47,8 +47,7 @@ extraction_specs = {
         film="18O",
     ),
     "Jazz9_all": dict(
-        data_files=[#"20B02_16O_01.pkl",
-                    "20B02_16O_02.pkl"],
+        data_files=["20B02_16O_02.pkl"],  # "20B02_16O_01.pkl",
         tspan_experiment=[0, 12000],
         tspan_exchange=[2000, 5000],
         tspan_extraction=[5700, 6700],
@@ -95,7 +94,7 @@ extractions = {}
 # run_list = ["Decade1C_all", "Jazz8b_all"]
 run_list = "all"
 # run_list = ["Jazz7_all", "Jazz7_18O", "Jazz6_18O"]
-calibration_file = '20A25_sniffer_fixed.json'
+calibration_file = "20A25_sniffer_fixed.json"
 for name, spec in extraction_specs.items():
     if not run_list == "all":
         if not name in run_list:

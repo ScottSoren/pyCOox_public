@@ -9,12 +9,13 @@ plt.close("all")
 forpublication = False
 if forpublication:  # for the publication figure
     import matplotlib as mpl
+
     figwidth, figheight = 3.25, 2.75
-    mpl.rcParams['figure.figsize'] = (figwidth, figheight)
+    mpl.rcParams["figure.figsize"] = (figwidth, figheight)
     # plt.rc('text', usetex=True)
-    plt.rc('font', family='sans-serif')
-    plt.rc('font', size=8)
-    plt.rc('lines', linewidth=0.5)
+    plt.rc("font", family="sans-serif")
+    plt.rc("font", size=8)
+    plt.rc("lines", linewidth=0.5)
 else:
     plt.style.use("default")
 
@@ -23,15 +24,33 @@ DATA_DIR = Path(__file__).parent.parent.parent / "pickles"
 CALIBRATION_DIR = Path(__file__).parent.parent
 
 extraction_specs = {
-    "PtOx":
-        {"file":"scanned.json", "position":1, "t_start":210, "tspan_ratio":[490, 500], "fancy_name":"Pt$^{18}$O$_x$",},
-    "IrO2":
-        {"file":"Decade1C_all.json", "position":2, "t_start":457,"tspan_ratio":[800, 1050], "fancy_name":"Ir$^{18}$O$_2$",},
-    "IrOx":
-        {"file":"Jazz8_all.json", "position":3, "t_start":424, "fancy_name":"Ir$^{18}$O$_x$",},
-    "IrOx_hyd":
-        {"file":"Jazz8b_all.json", "position":4, "t_start":167, "fancy_name":"Ir$^{18}$O$_x\cdot y$H$_2$O",},
-    }
+    "PtOx": {
+        "file": "scanned.json",
+        "position": 1,
+        "t_start": 210,
+        "tspan_ratio": [490, 500],
+        "fancy_name": "Pt$^{18}$O$_x$",
+    },
+    "IrO2": {
+        "file": "Decade1C_all.json",
+        "position": 2,
+        "t_start": 457,
+        "tspan_ratio": [800, 1050],
+        "fancy_name": "Ir$^{18}$O$_2$",
+    },
+    "IrOx": {
+        "file": "Jazz8_all.json",
+        "position": 3,
+        "t_start": 424,
+        "fancy_name": "Ir$^{18}$O$_x$",
+    },
+    "IrOx_hyd": {
+        "file": "Jazz8b_all.json",
+        "position": 4,
+        "t_start": 167,
+        "fancy_name": "Ir$^{18}$O$_x\cdot y$H$_2$O",
+    },
+}
 
 calibration_dir = Path("../..").absolute()
 calibration_file = calibration_dir / "20A25_sniffer_fixed.json"
@@ -57,7 +76,9 @@ for name, spec in extraction_specs.items():
 
     if True:  # correct calibration
         tspan_steady = extraction.tspan_ratio  # extraction.tspan_ratio
-        O2 = extraction.point_calibration(mol="O2", mass="M32", tspan=tspan_steady, n_el=4)
+        O2 = extraction.point_calibration(
+            mol="O2", mass="M32", tspan=tspan_steady, n_el=4
+        )
         # since we use cal_mat but point_calibration gives F_cal, this is the comparison
         # to make. We should then adjust such that it makes sense.
         correction = O2.F_cal / extraction.mdict["O2_M32"].F_cal
@@ -87,20 +108,20 @@ for name, spec in extraction_specs.items():
 
     t_int = 300
 
-    tspan_int = [spec["t_start"], spec["t_start"]+t_int]
+    tspan_int = [spec["t_start"], spec["t_start"] + t_int]
     position = spec["position"]
 
     totals = {}
     width = 0
-    f_hyd_1 = 1 / ( 1 - 0.22)
-    f_hyd_2 = 1 / ( 1 - 2*0.22)
-    width = 1/8
+    f_hyd_1 = 1 / (1 - 0.22)
+    f_hyd_2 = 1 / (1 - 2 * 0.22)
+    width = 1 / 8
 
     for (m, offset, ax, factor) in [
         (O2_excess_M34, -2, ax1, 1),
         (O2_M36, -2, ax1, 2),
-        (CO2_excess_M46, -1, ax1, 1*f_hyd_1),
-        (CO2_M48, -1, ax1, 2*f_hyd_2),
+        (CO2_excess_M46, -1, ax1, 1 * f_hyd_1),
+        (CO2_M48, -1, ax1, 2 * f_hyd_2),
         (O2, 1, ax2, 1),
         (CO2, 2, ax2, 2),
     ]:
@@ -122,7 +143,7 @@ for name, spec in extraction_specs.items():
     xticklabels += [spec["fancy_name"]]
 
 ylim2 = [0, 660]
-ylim1 = [lim*0.02 for lim in ylim2]
+ylim1 = [lim * 0.02 for lim in ylim2]
 
 ax1.set_xticks(xticks)
 ax1.set_xticklabels(xticklabels)

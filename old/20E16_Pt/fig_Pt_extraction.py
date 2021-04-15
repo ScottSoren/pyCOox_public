@@ -1,4 +1,3 @@
-
 from pathlib import Path
 import numpy as np
 from matplotlib import pyplot as plt
@@ -8,6 +7,7 @@ from EC_MS.converters import mdict_from_SI2020_calibration_file
 plt.close("all")
 if False:  # old wierd import during Spectro Inlet employment
     from spitze.quant import Calibration
+
     cal_dir = Path("..").absolute()
     c = Calibration.load("20A25_sniffer_fixed.json", cal_dir=cal_dir)
     c.F = c.F_0
@@ -22,11 +22,12 @@ mdict = mdict_from_SI2020_calibration_file(calibration_file)
 forpublication = True
 if forpublication:  # for the publication figure
     import matplotlib as mpl
-    mpl.rcParams['figure.figsize'] = (3.25, 2.75)
+
+    mpl.rcParams["figure.figsize"] = (3.25, 2.75)
     # plt.rc('text', usetex=True)  # crashingly slow
-    plt.rc('font', family='sans-serif')
-    plt.rc('font', size=6)
-    plt.rc('lines', linewidth=0.5)
+    plt.rc("font", family="sans-serif")
+    plt.rc("font", size=6)
+    plt.rc("lines", linewidth=0.5)
 else:
     plt.style.use("default")
 
@@ -38,11 +39,15 @@ file_A = extraction_dir / "scanned.json"
 file_B = extraction_dir / "scanned_B.json"
 
 extraction_A = Extraction.load(
-        file_A, data_dir=data_dir, mdict=mdict,
-) # Pt^{18}O in H2^{16}O
+    file_A,
+    data_dir=data_dir,
+    mdict=mdict,
+)  # Pt^{18}O in H2^{16}O
 extraction_B = Extraction.load(
-        file_B, data_dir=data_dir, mdict=mdict,
-) # Pt^{18}O in H2^{16}O
+    file_B,
+    data_dir=data_dir,
+    mdict=mdict,
+)  # Pt^{18}O in H2^{16}O
 extraction_B.sort_time()
 
 extraction_A.timeshift(100)
@@ -51,18 +56,18 @@ extraction_B.timeshift(350)
 tspan_experiment = [0, 1800]
 
 t_str = "time / [s]"
- 
+
 if True:
     extraction_A.reset()
     axes = extraction_A.plot_experiment(
-        masses=["M4", "M28", "M32", "M34", "M36", "M44", "M46", "M48", "M2"], 
-        tspan=tspan_experiment, 
+        masses=["M4", "M28", "M32", "M34", "M36", "M44", "M46", "M48", "M2"],
+        tspan=tspan_experiment,
         unit="pA",
         logplot=True,
     )
     # axes[0].legend()
     extraction_A.set_background(t_bg=extraction_A.t_bg)
-    
+
     axes[0].set_ylabel("signal / [pA]")
     axes[1].set_xlabel(t_str)
     axes[0].set_xlabel(t_str)
@@ -78,12 +83,14 @@ if True:
 if True:
     unit_right = "pmol/cm^2/s"
     axes = extraction_A.plot_exchange(
-            mol="O2", tspan=tspan_experiment,
-            unit_left="pmol/cm^2/s", unit_right=unit_right
+        mol="O2", tspan=tspan_experiment, unit_left="pmol/cm^2/s", unit_right=unit_right
     )
     extraction_A.plot_exchange(
-            mol="CO2", axes=axes, tspan=tspan_experiment,
-            unit_left="pmol/cm^2/s", unit_right=unit_right
+        mol="CO2",
+        axes=axes,
+        tspan=tspan_experiment,
+        unit_left="pmol/cm^2/s",
+        unit_right=unit_right,
     )
     axes[1].set_xlabel(t_str)
     axes[0].set_ylabel("signal / [pmol s$^{-1}$cm$^{-2}$]")
@@ -147,24 +154,26 @@ if False:
     extraction_A.x_lost = x_lost
     # portion m/z=44 CO2 lost to m/z=46 in 18O electrolyte should be the double-ish :
     extraction_B.x_lost = 2 * x_lost
-    for extraction in [extraction_B,
-                       extraction_A
-                       ]:
+    for extraction in [extraction_B, extraction_A]:
         color = extraction.get_majors_and_minors(mol="CO2")[1][0].get_color()
         excess_CO2 = extraction.create_excess_mol("CO2")
         extraction.excess_CO2 = excess_CO2
         for mass in excess_CO2.cal_mat:
-            excess_CO2.cal_mat[mass] *= 1/(1-extraction.x_lost)
+            excess_CO2.cal_mat[mass] *= 1 / (1 - extraction.x_lost)
         axes = extraction.plot_vs_potential(
-            tspan=tspan_extraction, ax=axes, mols=[excess_CO2], logplot=False,
-            color=color, linestyle=extraction.linestyle, t_bg=[1340, 1360],
+            tspan=tspan_extraction,
+            ax=axes,
+            mols=[excess_CO2],
+            logplot=False,
+            color=color,
+            linestyle=extraction.linestyle,
+            t_bg=[1340, 1360],
         )
-
 
     axes[0].invert_xaxis()
     axes[1].invert_xaxis()
     current_ticks_uA = [-10, -5, 0, 5, 10]
-    axes[1].set_yticks([y*1e-3 for y in current_ticks_uA])
+    axes[1].set_yticks([y * 1e-3 for y in current_ticks_uA])
     axes[1].set_yticklabels([str(y) for y in current_ticks_uA])
     axes[1].set_ylabel(r"J / [$\mu$A cm$^{-2}$]")
     axes[0].set_ylabel("lat. O in CO2 / [pmol/s]")
@@ -174,10 +183,18 @@ if False:
         fig.savefig("fig_Pt_extraction_vs_U.png")
         fig.savefig("fig_Pt_extraction_vs_U.svg")
 
-    if True: # calculate excess CO2
-        x_A, y_A = extraction_A.get_flux(extraction_A.excess_CO2, tspan=[1100, 1250],
-                                         unit="pmol/s", t_bg=[1340, 1360])
+    if True:  # calculate excess CO2
+        x_A, y_A = extraction_A.get_flux(
+            extraction_A.excess_CO2,
+            tspan=[1100, 1250],
+            unit="pmol/s",
+            t_bg=[1340, 1360],
+        )
         Y_A = np.trapz(y_A, x_A)
-        x_B, y_B = extraction_B.get_flux(extraction_B.excess_CO2, tspan=[1125, 1225],
-                                         unit="pmol/s", t_bg=[1340, 1360])
+        x_B, y_B = extraction_B.get_flux(
+            extraction_B.excess_CO2,
+            tspan=[1125, 1225],
+            unit="pmol/s",
+            t_bg=[1340, 1360],
+        )
         Y_B = np.trapz(y_B, x_B)

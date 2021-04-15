@@ -6,20 +6,19 @@ from EC_MS.utils.extraction_class import Extraction
 forpublication = False
 if forpublication:  # for the publication figure
     import matplotlib as mpl
-    mpl.rcParams['figure.figsize'] = (3.25, 2.75)
-    plt.rc('text', usetex=True)
-    plt.rc('font', family='sans-serif')
-    plt.rc('font', size=8)
-    plt.rc('lines', linewidth=0.5)
+
+    mpl.rcParams["figure.figsize"] = (3.25, 2.75)
+    plt.rc("text", usetex=True)
+    plt.rc("font", family="sans-serif")
+    plt.rc("font", size=8)
+    plt.rc("lines", linewidth=0.5)
 else:
     plt.style.use("default")
 
-extraction_dir = os.path.abspath(os.path.join(
-    os.path.split(__file__)[0], "../extractions"
-))
-data_dir = os.path.abspath(os.path.join(
-    os.path.split(__file__)[0], "../../pickles"
-))
+extraction_dir = os.path.abspath(
+    os.path.join(os.path.split(__file__)[0], "../extractions")
+)
+data_dir = os.path.abspath(os.path.join(os.path.split(__file__)[0], "../../pickles"))
 
 file_A = os.path.join(extraction_dir, "Jazz8_all.json")
 file_B = os.path.join(extraction_dir, "Jazz7_all.json")
@@ -28,10 +27,14 @@ extraction_A = Extraction.load(file_A, data_dir=data_dir)  # Ir^{18}O in H2^{16}
 extraction_B = Extraction.load(file_B, data_dir=data_dir)  # Ir^{18}O in H2^{16}O
 for extraction in [extraction_A, extraction_B]:
     if True:  # correct H2 signal
-        extraction.mdict["H2"].cal_mat["M4"] = -8.5e-4 * extraction.mdict["H2"].cal_mat["M2"]
+        extraction.mdict["H2"].cal_mat["M4"] = (
+            -8.5e-4 * extraction.mdict["H2"].cal_mat["M2"]
+        )
     if True:  # correct calibration
         tspan_steady = extraction.tspan_ratio  # extraction.tspan_ratio
-        O2 = extraction.point_calibration(mol="O2", mass="M32", tspan=tspan_steady, n_el=4)
+        O2 = extraction.point_calibration(
+            mol="O2", mass="M32", tspan=tspan_steady, n_el=4
+        )
         # since we use cal_mat but point_calibration gives F_cal, this is the comparison
         # to make. We should then adjust such that it makes sense.
         correction = O2.F_cal * extraction.mdict["O2_M32"].cal_mat["M32"]
@@ -52,8 +55,13 @@ if True:  # fig8a
 
     extraction_A.timeshift(300)
     axes = extraction_A.plot_exchange(mol="O2", tspan=tspan_experiment)
-    extraction_A.plot_flux(extraction_A.mdict["H2"], tspan=tspan_experiment,
-                           ax=axes[-1], unit="pmol/s", logplot=False)
+    extraction_A.plot_flux(
+        extraction_A.mdict["H2"],
+        tspan=tspan_experiment,
+        ax=axes[-1],
+        unit="pmol/s",
+        logplot=False,
+    )
     axes = extraction_A.plot_exchange(mol="CO2", tspan=tspan_experiment, axes=axes)
 
     if forpublication:
@@ -68,10 +76,14 @@ if True:  # fig8b, take 1
 
     extraction_B.timeshift(5450)
     axes = extraction_B.plot_exchange(mol="O2", tspan=tspan_experiment)
-    extraction_B.plot_flux(extraction_B.mdict["H2"], tspan=tspan_experiment,
-                           ax=axes[-1], unit="pmol/s", logplot=False)
+    extraction_B.plot_flux(
+        extraction_B.mdict["H2"],
+        tspan=tspan_experiment,
+        ax=axes[-1],
+        unit="pmol/s",
+        logplot=False,
+    )
     axes = extraction_B.plot_exchange(mol="CO2", tspan=tspan_experiment, axes=axes)
-
 
     if forpublication:
         axes[0].set_xlabel("time / [s]")
@@ -89,15 +101,16 @@ if True:  # fig8b, take 2
     axes = "new"
     results = {}
     for extraction, tspan_0, linestyle in [
-        (extraction_A, tspan_A, "-"), (extraction_B, tspan_B, "--")
+        (extraction_A, tspan_A, "-"),
+        (extraction_B, tspan_B, "--"),
     ]:
         t_zero = tspan_0[0]
-        tspan = [t-t_zero for t in tspan_0]
+        tspan = [t - t_zero for t in tspan_0]
         extraction.timeshift(t_zero)
         O2_excess = extraction.create_excess_mol(mol="O2")
         CO2_excess = extraction.create_excess_mol(mol="CO2")
         for mass, val in CO2_excess.cal_mat.items():
-            CO2_excess.cal_mat[mass] = val * 1/(1-0.4)
+            CO2_excess.cal_mat[mass] = val * 1 / (1 - 0.4)
         axes = extraction.plot_experiment(
             ax=axes,
             mols=[O2_excess, CO2_excess],
@@ -110,7 +123,7 @@ if True:  # fig8b, take 2
         )
         extraction.timeshift(-t_zero)
         for ax in axes:
-            ax.set_xlim([t-20 for t in tspan])
+            ax.set_xlim([t - 20 for t in tspan])
 
         x_O2, y_O2 = extraction.get_flux(O2_excess, tspan=tspan)
         x_CO2, y_CO2 = extraction.get_flux(CO2_excess, tspan=tspan)

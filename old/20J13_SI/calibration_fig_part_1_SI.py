@@ -11,4 +11,3 @@ for measurement in all_measurements():
     if "calibration" in measurement.category:
         ax = measurement.plot_experiment()
         ax[2].set_title(measurement.id)
-
