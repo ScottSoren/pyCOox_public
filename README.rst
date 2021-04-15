@@ -39,6 +39,7 @@ Scripts may depend on files produced by other scripts above them in this list (i
 paper_I_fig_S1
 --------------
 Supplementary Figure S1 of `Tracking oxygen atoms in electrochemical CO oxidation – Part I: Oxygen exchange via CO2 hydration <https://doi.org/10.1016/j.electacta.2021.137842>`_
+
 (Paper I) shows the derivation of the mass spec calibration (sensitivity factors), RHE calibration, and working distance calibration used throughout the articles.
 The script paper_I_fig_S1.py works produces the three subfigures and functions as a tutorial on chip EC-MS calibration.
 The folder also contains the calibration file (produced by the script) that other scripts in this repository read.
@@ -47,8 +48,9 @@ paper_I_fig_2
 --------------
 Figure 2 of Paper I
 
-See ``old/20A31/fig_COox_Pt_20A31.py``
-
+This figure is a repeat of the classic Figure 3 of `Trimarco et al, 2018 <https://doi.org/10.1016/j.electacta.2018.02.060>`_
+but in 18-O labeled electrolyte. The script makes the EC-MS plots (vs time) and vs potential.
+It shows that manipulation of these EC-MS data sets becomes easy and (dare I admit it) fun with ixdat.
 
 paper_I_fig_3
 --------------
@@ -147,4 +149,4 @@ The scripts in this folder are unfortunately not very well organized and readabl
 End
 ===
 Enjoy, and if you find this useful, help us make ixdat even more useful for everyone:
-https://ixdat.readthedocs.io/en/latest/introduction.html#
+https://ixdat.readthedocs.io/en/latest/introduction.html
