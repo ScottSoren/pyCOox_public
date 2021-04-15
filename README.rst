@@ -39,8 +39,9 @@ Scripts may depend on files produced by other scripts above them in this list (i
 paper_I_fig_S1
 --------------
 Supplementary Figure S1 of `Tracking oxygen atoms in electrochemical CO oxidation – Part I: Oxygen exchange via CO2 hydration <https://doi.org/10.1016/j.electacta.2021.137842>`_
-(Paper I) shows the derivation of the mass spec calibration (sensitivity factors), RHE calibration, and working distance calibration used throughout the article.
-See ``old/20J13_SI/calibration.py``
+(Paper I) shows the derivation of the mass spec calibration (sensitivity factors), RHE calibration, and working distance calibration used throughout the articles.
+The script paper_I_fig_S1.py works produces the three subfigures and functions as a tutorial on chip EC-MS calibration.
+The folder also contains the calibration file (produced by the script) that other scripts in this repository read.
 
 paper_I_fig_2
 --------------
