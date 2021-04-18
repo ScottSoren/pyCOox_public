@@ -39,17 +39,18 @@ Scripts may depend on files produced by other scripts above them in this list (i
 paper_I_fig_S1
 --------------
 Supplementary Figure S1 of `Tracking oxygen atoms in electrochemical CO oxidation – Part I: Oxygen exchange via CO2 hydration <https://doi.org/10.1016/j.electacta.2021.137842>`_
-
 (Paper I) shows the derivation of the mass spec calibration (sensitivity factors), RHE calibration, and working distance calibration used throughout the articles.
+
 The script paper_I_fig_S1.py works produces the three subfigures and functions as a tutorial on chip EC-MS calibration.
 The folder also contains the calibration file (produced by the script) that other scripts in this repository read.
 
 paper_I_fig_2
 --------------
-Figure 2 of Paper I
+Figure 2 of Paper I is a repeat of the classic Figure 3 of `Trimarco et al, 2018 <https://doi.org/10.1016/j.electacta.2018.02.060>`_
+but in 18-O labeled electrolyte. Two experiments are ploted: cyclic voltammatry in He-saturated and CO-saturated electrolyte (a and b),
+and a CO stripping experiment (c and d).
 
-This figure is a repeat of the classic Figure 3 of `Trimarco et al, 2018 <https://doi.org/10.1016/j.electacta.2018.02.060>`_
-but in 18-O labeled electrolyte. The script makes the EC-MS plots (vs time) and vs potential.
+The script makes the EC-MS plots of calibrated molecular fluxes together with electrohemical data both vs time (a and c) and vs potential (b and d).
 It shows that manipulation of these EC-MS data sets becomes easy and (dare I admit it) fun with ixdat.
 
 paper_I_fig_3
@@ -74,9 +75,14 @@ paper_II_fig_S1
 ---------------
 Figure S1 of
 `Tracking oxygen atoms in electrochemical CO oxidation - Part II: Lattice oxygen reactivity in oxides of Pt and Ir. <https://doi.org/10.1016/j.electacta.2021.137844>`_.
-(Paper II)
+(Paper II) is for iridium what Figure 2 of Paper I (itself a repeat of the classic Figure 3 of `Trimarco et al, 2018 <https://doi.org/10.1016/j.electacta.2018.02.060>`_) is for platinum:
+Cyclic voltammatry in He-saturated and CO-saturated 1.0 M HClO4 electrolyte, and a CO stripping experiment.
 
-See ``old/20A31/fig_COox_Ir_20A31.py``
+The script makes the EC-MS plots of calibrated molecular fluxes together with electrohemical data both vs time and vs potential.
+It shows that manipulation of these EC-MS data sets becomes easy and (dare I admit it) fun with ixdat.
+
+Interesting, Ir behaves very similar to Pt with respect to hydrogen and carbon (HER and CO oxidation), but as the rest of the paper makes clear,
+very differently when it comes to oxygen (OER).
 
 paper_II_fig_S2
 ---------------

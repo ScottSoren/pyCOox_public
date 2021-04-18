@@ -1,80 +1,80 @@
 {
-    "RE_vs_RHE": 0.7184388309,
     "ms_cal_results": [
         {
-            "mol": "H2",
+            "name": "H2_M2",
             "F": 2.2967883616561005,
             "cal_type": "ecms_calibration_curve",
             "mass": "M2",
-            "name": "H2_M2"
+            "mol": "H2"
         },
         {
-            "mol": "O2",
+            "name": "O2_M32",
             "F": 1.0718207128195842,
             "cal_type": "internal",
             "mass": "M32",
-            "name": "O2_M32"
+            "mol": "O2"
         },
         {
-            "mol": "O2",
+            "name": "O2_M34",
             "F": 1.0718207128195842,
             "cal_type": "internal",
             "mass": "M34",
-            "name": "O2_M34"
+            "mol": "O2"
         },
         {
-            "mol": "O2",
+            "name": "O2_M36",
             "F": 1.0718207128195842,
             "cal_type": "internal",
             "mass": "M36",
-            "name": "O2_M36"
+            "mol": "O2"
         },
         {
-            "mol": "CO2",
+            "name": "CO2_M44",
             "F": 1.220300466942998,
             "cal_type": "internal",
             "mass": "M44",
-            "name": "CO2_M44"
+            "mol": "CO2"
         },
         {
-            "mol": "CO2",
+            "name": "CO2_M46",
             "F": 1.220300466942998,
             "cal_type": "internal",
             "mass": "M46",
-            "name": "CO2_M46"
+            "mol": "CO2"
         },
         {
-            "mol": "CO2",
+            "name": "CO2_M48",
             "F": 1.220300466942998,
             "cal_type": "internal",
             "mass": "M48",
-            "name": "CO2_M48"
+            "mol": "CO2"
         },
         {
-            "mol": "CO",
+            "name": "CO_M28",
             "F": 1.1546785471047338,
             "cal_type": "gas_flux_calibration",
             "mass": "M28",
-            "name": "CO_M28"
+            "mol": "CO"
         },
         {
-            "mol": "He",
+            "name": "He_M4",
             "F": 0.7397573643179918,
             "cal_type": "gas_flux_calibration",
             "mass": "M4",
-            "name": "He_M4"
+            "mol": "He"
         },
         {
-            "mol": "H2",
+            "name": "H2_M2_carrier",
             "F": 2.1090581521844625,
             "cal_type": "gas_flux_calibration",
             "mass": "M2",
-            "name": "H2_M2_carrier"
+            "mol": "H2"
         }
     ],
     "L": 0.00013190274709844614,
-    "date": "20A31",
     "name": "Scott2021a_ElectrocmimActa_calibration",
+    "setup": "DTU sniffer",
     "A_el": 0.196,
-    "setup": "DTU sniffer"
+    "date": "20A31",
+    "RE_vs_RHE": 0.7184388309
 }
