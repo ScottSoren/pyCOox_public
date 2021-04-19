@@ -86,9 +86,12 @@ very differently when it comes to oxygen (OER).
 
 paper_II_fig_S2
 ---------------
-Supplementary Figure S2 of Paper II
+Supplementary Figure S2 of Paper II shows the formation of PtOx and IrOx during constant
+anodic current on Pt and Ir, respectively, and their subsequent reduction to determine
+the thickness of the oxide layer.
 
-See ``old/20A31/fix_oxidation_Pt.py`` and ``old/20A31/fix_oxidation_Ir.py``
+It shows how to calculated the difference in charge passed in corresponding parts of two
+cyclic voltammograms using ixdat.
 
 paper_II_fig_1
 --------------
