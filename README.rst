@@ -95,9 +95,14 @@ cyclic voltammograms using ixdat.
 
 paper_II_fig_1
 --------------
-Figure 1 of Paper II
+Figure 1 of Paper II shows the reaction of the electrochemical oxide layer in Pt(18)Ox with CO.
 
-See ``old/20E16_Pt/fig_Pt_extraction.py``
+First, Figure 1a plots the raw data. Then, the data is calibrated and plottet again on two axes to highlight the isotopic effect. 
+The amount of excess 18-O incorporated first in the O2 evolved during OER, and then 
+in the CO2 evolved during CO oxidation as the surface is slowly reduced, is calculated.
+
+This analysis is done semi-manually, but in the future will also be done with a special OERIsotopeExperiment class in ixdat.
+
 
 paper_II_fig_S3
 ---------------
