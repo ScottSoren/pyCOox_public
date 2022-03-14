@@ -83,7 +83,7 @@ L = 2 * FARADAY_CONSTANT / J_lim * D_H2 * c_sat_H2  # the working distance in [m
 
 # Let's plot it as a thicker line to make it clear which value we've used:
 j_HOR = I_HOR_mA / A_el  # the current we used, here in [mA/cm^2] to match the plot.
-axes_a[2].plot(t_HOR, j_HOR, color="red", linewidth=5)
+axes_a[3].plot(t_HOR, j_HOR, color="red", linewidth=5)
 
 # ---------------- Calibrate for H2 at m/z=2 -------------------------- #
 
@@ -151,7 +151,7 @@ F_O2_Mx = S_int_O2 / n  # sensitivity factor in [C/mol]
 # define the calibration results, and add the to the cal_results list:
 for mass in ["M32", "M34", "M36"]:
     cal = MSCalResult(
-        name=f"O2_{mass}",
+        name=f"O2@{mass}",
         mol="O2",
         mass=mass,
         F=F_O2_Mx,
@@ -186,7 +186,7 @@ F_CO2_Mx = S_int_CO2 / n  # sensitivity factor in [C/mol]
 # define the calibration results:
 for mass in ["M44", "M46", "M48"]:
     cal = MSCalResult(
-        name=f"CO2_{mass}",
+        name=f"CO2@{mass}",
         mass=mass,
         mol="CO2",
         F=F_CO2_Mx,
@@ -218,7 +218,7 @@ cal_He = chip.gas_flux_calibration(
 cal_H2_2 = chip.gas_flux_calibration(
     measurement=meas, mol="H2", mass="M2", tspan=(6900, 7000), ax=axes_a[0]
 )
-cal_H2_2.name = "H2_M2_carrier"  # so that it doesn't clash with the EC-MS calibration.
+cal_H2_2.name = "H2@M2-carrier"  # so that it doesn't clash with the EC-MS calibration.
 
 # add these gas calibrations to the list:
 cal_results += [cal_CO, cal_He, cal_H2_2]
@@ -248,8 +248,8 @@ if True:  # Change this to True to make subfigure c
 
     # The analysis of the calibration is done with EC_MS's "recalibrate" function:
     _, ax_c = recalibrate(
-        internal=[mdict["CO2_M44"], mdict["O2_M32"], mdict["H2_M2"]],
-        external=[mdict["He_M4"], mdict["CO_M28"], mdict["H2_M2_carrier"]],
+        internal=[mdict["CO2@M44"], mdict["O2@M32"], mdict["H2@M2"]],
+        external=[mdict["He@M4"], mdict["CO@M28"], mdict["H2@M2-carrier"]],
         labels=True,
     )
     # save it:

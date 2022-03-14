@@ -15,11 +15,11 @@ included in the repository in ../paper_I_fig_S1
 The attentive user may notice that the value of the calibrated signals are normalized to
 electrode area here, but not in the publication.
 """
-
 import numpy as np
 
 from ixdat import Measurement
 from ixdat.techniques.ec_ms import ECMSCalibration
+
 
 calibration = ECMSCalibration.read(
     "../paper_I_fig_S1/Scott2021a_ElectrocmimActa_calibration.ix"
@@ -27,12 +27,12 @@ calibration = ECMSCalibration.read(
 meas_Pt = Measurement.read(
     "../data/01_Pt_in_18O_electrolyte.pkl",
     reader="EC_MS",
-    calibration=calibration,
+    calibration_list=[calibration],
 )
 meas_Ir = Measurement.read(
     "../data/03_Ir_in_18O_electrolyte.pkl",
     reader="EC_MS",
-    calibration=calibration,
+    calibration_list=[calibration],
 )
 
 if False:  # plot entire measurements
@@ -50,7 +50,7 @@ meas_a.set_bg(
 )
 axes_a = meas_a.plot_measurement(  # all on one axis here!
     mol_lists=[
-        ["O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+        ["O2@M32", "O2@M34", "O2@M36", "CO2@M44", "CO2@M46", "CO2@M48"],
         [
             "H2",
         ],
@@ -58,7 +58,7 @@ axes_a = meas_a.plot_measurement(  # all on one axis here!
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
-    removebackground=True,
+    remove_background=True,
 )
 axes_a[0].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
 
@@ -72,18 +72,18 @@ meas_b2 = meas_a.cut(tspan=[2460, 2566]).as_cv()
 
 # and plot these on shared axes:
 axes_b = meas_b1.plot_vs_potential(
-    mol_list=["H2", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", "CO2@M44", "CO2@M46", "CO2@M48"],
     unit="pmol/s/cm^2",
     legend=False,
     logplot=False,
-    removebackground=True,
+    remove_background=True,
 )
 meas_b2.plot_vs_potential(
-    mol_list=["H2", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", "CO2@M44", "CO2@M46", "CO2@M48"],
     unit="pmol/s/cm^2",
     legend=False,
     logplot=False,
-    removebackground=True,
+    remove_background=True,
     linestyle="--",
     axes=axes_b,
 )
@@ -126,11 +126,11 @@ meas_c.set_bg(
     tspan_bg=[0, 20], mass_list=["M2", "M32", "M34", "M36", "M44", "M46", "M48"]
 )
 axes_c = meas_c.plot_measurement(  # all on one axis here!
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", "O2@M32", "O2@M34", "O2@M36", "CO2@M44", "CO2@M46", "CO2@M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
-    removebackground=True,
+    remove_background=True,
 )
 axes_c[0].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
 
@@ -144,18 +144,18 @@ meas_d2 = meas_c.cut(tspan=[2607, 2706]).as_cv()
 
 # and plot these on shared axes:
 axes_d = meas_d1.plot_vs_potential(
-    mol_list=["H2", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", "CO2@M44", "CO2@M46", "CO2@M48"],
     unit="pmol/s/cm^2",
     legend=False,
     logplot=False,
-    removebackground=True,
+    remove_background=True,
 )
 meas_d2.plot_vs_potential(
-    mol_list=["H2", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", "CO2@M44", "CO2@M46", "CO2@M48"],
     unit="pmol/s/cm^2",
     legend=False,
     logplot=False,
-    removebackground=True,
+    remove_background=True,
     linestyle="--",
     axes=axes_d,
 )
