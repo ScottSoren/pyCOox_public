@@ -17,7 +17,6 @@ different here than in the publication. I think this was a mistake in the public
 that I had used a different, less accurate, calibration. The mistake did not affect the
 conclusions of the publication.
 """
-
 from ixdat import Measurement
 from ixdat.techniques.ec_ms import ECMSCalibration
 
@@ -29,7 +28,9 @@ calibration = ECMSCalibration.read(
 )
 
 meas = Measurement.read(
-    "../data/01_Pt_in_18O_electrolyte.pkl", reader="EC_MS", calibration=calibration
+    "../data/01_Pt_in_18O_electrolyte.pkl",
+    reader="EC_MS",
+    calibration_list=[calibration]
 )
 if False:  # plot the whole raw data to get an overview
     meas.plot_measurement()
@@ -50,7 +51,7 @@ meas_a.tstamp += meas_a.t[0]
 axes_a = meas_a.plot_measurement(
     mol_lists=[
         ["He", "CO"],  # left y-axis
-        ["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],  # right
+        ["H2", "O2@M32", "O2@M34", "O2@M36", "CO2@M44", "CO2@M46", "CO2@M48"],  # right
     ],
     tspan_bg=[
         None,
@@ -61,7 +62,7 @@ axes_a = meas_a.plot_measurement(
     legend=False,
 )
 axes_a[0].set_ylabel("cal. sig. / [nmol s$^{-1}$]")
-axes_a[-1].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
+axes_a[2].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
 
 fig_a = axes_a[0].get_figure()
 fig_a.savefig("paper_I_fig_2a.png")
@@ -71,23 +72,23 @@ fig_a.savefig("paper_I_fig_2a.png")
 meas_b = meas_a.as_cv()
 meas_b.redefine_cycle(start_potential=0.4, redox=1)
 axes_b = meas_b[1].plot_vs_potential(
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", "O2@M32", "O2@M34", "O2@M36", "CO2@M44", "CO2@M46", "CO2@M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
-    removebackground=True,
+    remove_background=True,
 )
 meas_b[3].plot_vs_potential(
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", "O2@M32", "O2@M34", "O2@M36", "CO2@M44", "CO2@M46", "CO2@M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
-    removebackground=True,
+    remove_background=True,
     axes=axes_b,
     linestyle="--",
 )
 axes_b[0].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
-axes_b[0].set_xlabel(meas_b.V_str)
+axes_b[0].set_xlabel(meas_b.v_name)
 
 fig_b = axes_b[0].get_figure()
 fig_b.savefig("paper_I_fig_2b.png")
@@ -104,15 +105,15 @@ meas_c.set_bg(
 axes_c = meas_c.plot_measurement(
     mol_lists=[
         ["He", "CO"],  # left y-axis
-        ["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],  # right
+        ["H2", "O2@M32", "O2@M34", "O2@M36", "CO2@M44", "CO2@M46", "CO2@M48"],  # right
     ],
     unit=["nmol/s", "pmol/s/cm^2"],  # [left, right] y-axes
     logplot=False,
     legend=False,
 )
 axes_c[0].set_ylabel("cal. sig. / [nmol s$^{-1}$]")
-axes_c[-1].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
-axes_c[-1].set_ylim(bottom=-5)
+axes_c[2].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
+axes_c[2].set_ylim(bottom=-5)
 
 fig_c = axes_c[0].get_figure()
 fig_c.savefig("paper_I_fig_2c.png")
@@ -122,23 +123,23 @@ fig_c.savefig("paper_I_fig_2c.png")
 meas_d = meas_c.as_cv()
 meas_d.redefine_cycle(start_potential=0.38, redox=0)
 axes_d = meas_d[2].plot_vs_potential(
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", "O2@M32", "O2@M34", "O2@M36", "CO2@M44", "CO2@M46", "CO2@M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
-    removebackground=True,
+    remove_background=True,
 )
 meas_d[3].plot_vs_potential(
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", "O2@M32", "O2@M34", "O2@M36", "CO2@M44", "CO2@M46", "CO2@M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
-    removebackground=True,
+    remove_background=True,
     axes=axes_d,
     linestyle="--",
 )
 axes_d[0].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
-axes_d[0].set_xlabel(meas_b.V_str)
+axes_d[0].set_xlabel(meas_b.v_name)
 
 fig_d = axes_d[0].get_figure()
 fig_d.savefig("paper_I_fig_2d.png")
