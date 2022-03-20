@@ -26,6 +26,18 @@ from ixdat.techniques.ms import MSInlet, MSCalResult
 from ixdat.techniques.ec_ms import ECMSCalibration
 from ixdat.constants import FARADAY_CONSTANT
 
+# check which version of ixdat we're running to know the order of EC-MS axes
+#    and how the isotopic molecules are named (with "_" or "@" between mol and mass):
+import ixdat
+if ixdat.__version__.startswith("0.1"):
+    index_j_ax = 2
+    sep = "_"
+elif ixdat.__version__.startswith("0.2"):
+    index_j_ax = 3
+    sep = "@"
+else:
+    raise ImportError(f"This script doesn't run with ixdat version={ixdat.__version__}")
+
 # ---------------- load and plot the raw data ------------------------ #
 # All the data used for calibration is here:
 meas = Measurement.read("../data/01_Pt_in_18O_electrolyte.pkl", reader="EC_MS")
@@ -83,7 +95,7 @@ L = 2 * FARADAY_CONSTANT / J_lim * D_H2 * c_sat_H2  # the working distance in [m
 
 # Let's plot it as a thicker line to make it clear which value we've used:
 j_HOR = I_HOR_mA / A_el  # the current we used, here in [mA/cm^2] to match the plot.
-axes_a[2].plot(t_HOR, j_HOR, color="red", linewidth=5)
+axes_a[index_j_ax].plot(t_HOR, j_HOR, color="red", linewidth=5)
 
 # ---------------- Calibrate for H2 at m/z=2 -------------------------- #
 
@@ -151,7 +163,7 @@ F_O2_Mx = S_int_O2 / n  # sensitivity factor in [C/mol]
 # define the calibration results, and add the to the cal_results list:
 for mass in ["M32", "M34", "M36"]:
     cal = MSCalResult(
-        name=f"O2_{mass}",
+        name="O2" + sep + mass,
         mol="O2",
         mass=mass,
         F=F_O2_Mx,
@@ -186,7 +198,7 @@ F_CO2_Mx = S_int_CO2 / n  # sensitivity factor in [C/mol]
 # define the calibration results:
 for mass in ["M44", "M46", "M48"]:
     cal = MSCalResult(
-        name=f"CO2_{mass}",
+        name=f"CO2" + sep + mass,
         mass=mass,
         mol="CO2",
         F=F_CO2_Mx,
@@ -218,7 +230,8 @@ cal_He = chip.gas_flux_calibration(
 cal_H2_2 = chip.gas_flux_calibration(
     measurement=meas, mol="H2", mass="M2", tspan=(6900, 7000), ax=axes_a[0]
 )
-cal_H2_2.name = "H2_M2_carrier"  # so that it doesn't clash with the EC-MS calibration.
+cal_H2_2.name = sep.join(["H2", "M2", "carrier"])
+# ^ the extra name is so that it doesn't clash with the EC-MS calibration.
 
 # add these gas calibrations to the list:
 cal_results += [cal_CO, cal_He, cal_H2_2]
@@ -248,8 +261,16 @@ if True:  # Change this to True to make subfigure c
 
     # The analysis of the calibration is done with EC_MS's "recalibrate" function:
     _, ax_c = recalibrate(
-        internal=[mdict["CO2_M44"], mdict["O2_M32"], mdict["H2_M2"]],
-        external=[mdict["He_M4"], mdict["CO_M28"], mdict["H2_M2_carrier"]],
+        internal=[
+            mdict[f"CO2{sep}M44"],
+            mdict[f"O2{sep}M32"],
+            mdict[f"H2{sep}M2"]
+        ],
+        external=[
+            mdict[f"He{sep}M4"],
+            mdict[f"CO{sep}M28"],
+            mdict[sep.join(["H2", "M2", "carrier"])]
+        ],
         labels=True,
     )
     # save it:

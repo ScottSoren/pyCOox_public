@@ -14,6 +14,21 @@ It has all of the data analysis and plotting scripts. These scripts can serve as
 
 Setup
 =====
+
+Update ixdat and use the code on the main branch!
+-------------------------------------------------
+
+This branch is for ixdat v0.1.x
+
+It works with ixdat v0.2.0, giving lots of Deprecation Warnings.
+
+It will not work with ixdat v0.3+
+
+Please update your ixdat and use the main branch.
+
+Using this branch
+-----------------
+
 To run the scripts:
 
 1. Make sure you have python 3.6+ installed with the ``numpy``, ``scipy``, and ``matplotlib`` packages as a minimum. I recommend Anaconda python.

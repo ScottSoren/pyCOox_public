@@ -21,19 +21,33 @@ import numpy as np
 from ixdat import Measurement
 from ixdat.techniques.ec_ms import ECMSCalibration
 
+# check which version of ixdat we're running to know the order of EC-MS axes
+#    and how the isotopic molecules are named (with "_" or "@" between mol and mass):
+import ixdat
+if ixdat.__version__.startswith("0.1"):
+    index_j_ax = 2
+    sep = "_"
+elif ixdat.__version__.startswith("0.2"):
+    index_j_ax = 3
+    sep = "@"
+else:
+    raise ImportError(f"This script doesn't run with ixdat version={ixdat.__version__}")
+
+# ---------- load calibration and data, find data selections -------------------- #
+
 calibration = ECMSCalibration.read(
     "../paper_I_fig_S1/Scott2021a_ElectrocmimActa_calibration.ix"
 )
 meas_Pt = Measurement.read(
     "../data/01_Pt_in_18O_electrolyte.pkl",
     reader="EC_MS",
-    calibration=calibration,
 )
 meas_Ir = Measurement.read(
     "../data/03_Ir_in_18O_electrolyte.pkl",
     reader="EC_MS",
-    calibration=calibration,
 )
+meas_Ir.calibration = calibration
+meas_Pt.calibration = calibration
 
 if False:  # plot entire measurements
     axes_Pt = meas_Pt.plot_measurement()
@@ -50,10 +64,8 @@ meas_a.set_bg(
 )
 axes_a = meas_a.plot_measurement(  # all on one axis here!
     mol_lists=[
-        ["O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
-        [
-            "H2",
-        ],
+        [f"O2{sep}M32", f"O2{sep}M34", f"O2{sep}M36", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],  # left
+        ["H2"]  # right
     ],
     unit="pmol/s/cm^2",
     logplot=False,
@@ -72,14 +84,14 @@ meas_b2 = meas_a.cut(tspan=[2460, 2566]).as_cv()
 
 # and plot these on shared axes:
 axes_b = meas_b1.plot_vs_potential(
-    mol_list=["H2", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],
     unit="pmol/s/cm^2",
     legend=False,
     logplot=False,
     removebackground=True,
 )
 meas_b2.plot_vs_potential(
-    mol_list=["H2", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],
     unit="pmol/s/cm^2",
     legend=False,
     logplot=False,
@@ -126,7 +138,7 @@ meas_c.set_bg(
     tspan_bg=[0, 20], mass_list=["M2", "M32", "M34", "M36", "M44", "M46", "M48"]
 )
 axes_c = meas_c.plot_measurement(  # all on one axis here!
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", f"O2{sep}M32", f"O2{sep}M34", f"O2{sep}M36", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
@@ -144,14 +156,14 @@ meas_d2 = meas_c.cut(tspan=[2607, 2706]).as_cv()
 
 # and plot these on shared axes:
 axes_d = meas_d1.plot_vs_potential(
-    mol_list=["H2", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],
     unit="pmol/s/cm^2",
     legend=False,
     logplot=False,
     removebackground=True,
 )
 meas_d2.plot_vs_potential(
-    mol_list=["H2", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],
     unit="pmol/s/cm^2",
     legend=False,
     logplot=False,

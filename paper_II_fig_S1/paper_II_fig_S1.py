@@ -22,15 +22,25 @@ conclusions of the publication.
 from ixdat import Measurement
 from ixdat.techniques.ec_ms import ECMSCalibration
 
+# check which version of ixdat we're running to know the order of EC-MS axes
+#    and how the isotopic molecules are named (with "_" or "@" between mol and mass):
+import ixdat
+if ixdat.__version__.startswith("0.1"):
+    index_j_ax = 2
+    sep = "_"
+elif ixdat.__version__.startswith("0.2"):
+    index_j_ax = 3
+    sep = "@"
+else:
+    raise ImportError(f"This script doesn't run with ixdat version={ixdat.__version__}")
 
 # ---------- load calibration and data, find data selections -------------------- #
 
-calibration = ECMSCalibration.read(
-    "../paper_I_fig_S1/Scott2021a_ElectrocmimActa_calibration.ix"
-)
-
 meas = Measurement.read(
-    "../data/03_Ir_in_18O_electrolyte.pkl", reader="EC_MS", calibration=calibration
+    "../data/03_Ir_in_18O_electrolyte.pkl", reader="EC_MS",
+)
+meas.calibration = ECMSCalibration.read(
+    "../paper_I_fig_S1/Scott2021a_ElectrocmimActa_calibration.ix"
 )
 if False:  # plot the whole raw data to get an overview
     meas.plot_measurement()
@@ -56,7 +66,7 @@ meas_a.tstamp += meas_a.t[0]
 axes_a = meas_a.plot_measurement(
     mol_lists=[
         ["He", "CO"],  # left y-axis
-        ["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],  # right
+        ["H2", f"O2{sep}M32", f"O2{sep}M34", f"O2{sep}M36", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],  # right
     ],
     unit=["nmol/s", "pmol/s/cm^2"],  # [left, right] y-axes,
     removebackground=[False, True],
@@ -74,14 +84,14 @@ fig_a.savefig("paper_II_fig_S1a.png")
 meas_b = meas_a.as_cv()
 meas_b.redefine_cycle(start_potential=0.2, redox=1)
 axes_b = meas_b[1].plot_vs_potential(
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=[f"H2", f"O2{sep}M32", f"O2{sep}M34", f"O2{sep}M36", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
     removebackground=True,
 )
 meas_b[3].plot_vs_potential(
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=[f"H2", f"O2{sep}M32", f"O2{sep}M34", f"O2{sep}M36", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
@@ -104,7 +114,7 @@ meas_c.tstamp += meas_c.t[0]
 axes_c = meas_c.plot_measurement(
     mol_lists=[
         ["He", "CO"],  # left y-axis
-        ["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],  # right
+        ["H2", f"O2{sep}M32", f"O2{sep}M34", f"O2{sep}M36", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],  # right
     ],
     unit=["nmol/s", "pmol/s/cm^2"],  # [left, right] y-axes
     removebackground=[False, True],
@@ -123,14 +133,14 @@ fig_c.savefig("paper_II_fig_S1c.png")
 meas_d = meas_c.as_cv()
 meas_d.redefine_cycle(start_potential=0.15, redox=0)
 axes_d = meas_d[2].plot_vs_potential(
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", f"O2{sep}M32", f"O2{sep}M34", f"O2{sep}M36", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
     removebackground=True,
 )
 meas_d[3].plot_vs_potential(
-    mol_list=["H2", "O2_M32", "O2_M34", "O2_M36", "CO2_M44", "CO2_M46", "CO2_M48"],
+    mol_list=["H2", f"O2{sep}M32", f"O2{sep}M34", f"O2{sep}M36", f"CO2{sep}M44", f"CO2{sep}M46", f"CO2{sep}M48"],
     unit="pmol/s/cm^2",
     logplot=False,
     legend=False,
