@@ -88,7 +88,7 @@ meas_b[3].plot_vs_potential(
     linestyle="--",
 )
 axes_b[0].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
-axes_b[0].set_xlabel(meas_b.v_name)
+axes_b[0].set_xlabel(meas_b.U_name)
 
 fig_b = axes_b[0].get_figure()
 fig_b.savefig("paper_I_fig_2b.png")
@@ -139,7 +139,7 @@ meas_d[3].plot_vs_potential(
     linestyle="--",
 )
 axes_d[0].set_ylabel("cal. sig. / [pmol s$^{-1}$cm$^{-2}$]")
-axes_d[0].set_xlabel(meas_b.v_name)
+axes_d[0].set_xlabel(meas_b.U_name)
 
 fig_d = axes_d[0].get_figure()
 fig_d.savefig("paper_I_fig_2d.png")
