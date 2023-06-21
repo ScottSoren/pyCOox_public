@@ -60,7 +60,7 @@ if False:  # save the figure as it is, without the highlights:
 # potential ("Ewe/V" or, equivalently, "raw potential / [V]") while the electrolyte
 # is saturated with hydrogen and there is zero current (OCP). This happens between
 # 6200 s and 6300 s in the measurement. We use the "grab" function:
-t_RHE, v_RHE = meas.grab("raw potential / [V]", tspan=(6200, 6300))
+t_RHE, v_RHE = meas.grab("raw_potential", tspan=(6200, 6300))
 RE_vs_RHE = -np.mean(v_RHE)
 
 # Let's plot it as a thicker line to make it clear which value we've used:
@@ -69,7 +69,7 @@ axes_a[1].plot(t_RHE, v_RHE, color="black", linewidth=5)
 # The working distance can be calculated by the mass-transport-limited HOR current.
 # This is the raw current ("I/mA" or, equivalently, "raw current / [mA]") when the
 # electrolyte is H2-saturated and the potential is in the double-layer region:
-t_HOR, I_HOR_mA = meas.grab("raw current / [mA]", tspan=(7000, 7060))
+t_HOR, I_HOR_mA = meas.grab("raw_current", tspan=(7000, 7060))
 I_lim = np.mean(I_HOR_mA) * 1e-3  # take the average and convert it from mA to [A]
 J_lim = I_lim / (A_el * 1e-4)  # the geometric current density in [A/m^2]
 # (the factor 1e-4 converts A_el from cm^2 to m^2)
@@ -89,7 +89,7 @@ axes_a[3].plot(t_HOR, j_HOR, color="red", linewidth=5)
 
 # subfigure b is the only calibration curve in the dataset, for H2.
 # For this we use the ixdat function which automates this:
-cal_result_H2, ax_b, _ = meas.ecms_calibration_curve(
+cal_result_H2, ax_b = meas.ecms_calibration_curve(
     mol="H2",
     mass="M2",
     n_el=-2,
@@ -97,6 +97,7 @@ cal_result_H2, ax_b, _ = meas.ecms_calibration_curve(
     tspan_bg=(4850, 4900),
     ax="new",
     axes_measurement=axes_a,
+    return_ax=True,
 )
 # Because we asked for two types of plotting, three arguments are returned.
 # The first, which we call cal_result_H2, is a MSCalResult for H2.
@@ -135,7 +136,7 @@ for mass in ["M32", "M34", "M36"]:
 
 Q = (
     meas.integrate(
-        "raw current / [mA]",
+        "raw_current",
         tspan=tspan_OER,
     )
     * 1e-3
@@ -173,7 +174,7 @@ for mass in ["M44", "M46", "M48"]:
         ax=axes_a[0],  # the axis on which to indicate the integral
     )  # The integral is returned in [A * s] = [C]
 Q = (
-    meas.integrate("raw current / [mA]", tspan=tspan_COox) * 1e-3
+    meas.integrate("raw_current", tspan=tspan_COox) * 1e-3
 )  # Charge passed in [C]. (factor 1e-3 converts mC to C)
 n = Q / (
     2 * FARADAY_CONSTANT
