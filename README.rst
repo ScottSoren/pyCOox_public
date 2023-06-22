@@ -15,7 +15,7 @@ It has all of the data analysis and plotting scripts. These scripts can serve as
 Setup
 =====
 
-This version of the repository works with ixdat v0.2
+This version of the repository works with **ixdat v0.2.5** (updated June 21, 2023).
 
 For a version compatible with ixdat v0.1.x, see the `ixdat_v0p1 branch <https://github.com/ScottSoren/pyCOox_public/tree/ixdat_v0p1>`_
 
